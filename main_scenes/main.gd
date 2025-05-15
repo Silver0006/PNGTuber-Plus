@@ -152,6 +152,8 @@ func _process(delta):
 	
 	followShadow()
 
+
+
 func followShadow():
 	shadow.visible = is_instance_valid(Global.heldSprite)
 	if !shadow.visible:
@@ -583,14 +585,13 @@ func _on_button_pressed():
 func _on_settings_buttons_pressed():
 	settingsMenu.visible = !settingsMenu.visible
 
-
-func _on_background_input_capture_bg_key_pressed(node, keys_pressed):
+func _input(event):
 	var keyStrings = []
-	
-	for i in keys_pressed:
-		if keys_pressed[i]:
-			keyStrings.append(OS.get_keycode_string(i) if !OS.get_keycode_string(i).strip_edges().is_empty() else "Keycode" + str(i))
-	
+	if event is InputEventKey and event.pressed:
+		var i = event.keycode
+		print("Key pressed:", OS.get_keycode_string(i))
+		keyStrings.append(OS.get_keycode_string(i) if not OS.get_keycode_string(i).strip_edges().is_empty() else "Keycode" + str(i))
+
 	if fileSystemOpen:
 		return
 	
