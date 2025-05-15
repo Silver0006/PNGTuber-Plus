@@ -617,19 +617,9 @@ func _input(event):
 		if i >= 0:
 			changeCostume(i+1)
 	
-
-
-func bgInputSprite(node, keys_pressed):
-	if fileSystemOpen:
-		return
-	var keyStrings = []
-	
-	for i in keys_pressed:
-		if keys_pressed[i]:
-			keyStrings.append(OS.get_keycode_string(i) if !OS.get_keycode_string(i).strip_edges().is_empty() else "Keycode" + str(i))
 	
 	if keyStrings.size() <= 0:
 		emit_signal("fatfuckingballs")
 		return
 	
-	spriteVisToggles.emit(keyStrings)
+	emit_signal("spriteVisToggles", keyStrings)
