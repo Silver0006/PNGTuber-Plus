@@ -84,7 +84,7 @@ var toggle = "null"
 
 func _ready():
 	
-	Global.main.spriteVisToggles.connect(visToggle)
+	Global.main.spriteVisToggles.connect(Callable(self, "visToggle"))
 	
 	var img = Image.new()
 	var err = img.load(path)
@@ -320,7 +320,7 @@ func drag(delta):
 	if dragSpeed == 0:
 		dragger.global_position = wob.global_position
 	else:
-		dragger.global_position = lerp(dragger.global_position,wob.global_position,1/dragSpeed)
+		dragger.global_position = lerp(dragger.global_position,wob.global_position,1.0/dragSpeed)
 		dragOrigin.global_position = dragger.global_position
 
 func wobble():
@@ -395,6 +395,8 @@ func getAllLinkedSprites():
 			linkedSprites.append(node)
 	return linkedSprites
 
+
+#checks layer toggles
 func visToggle(keys):
 	if keys.has(toggle):
 		$WobbleOrigin/DragOrigin.visible = !$WobbleOrigin/DragOrigin.visible
