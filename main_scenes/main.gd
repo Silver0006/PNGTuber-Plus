@@ -53,7 +53,6 @@ signal emptiedCapture
 signal pressedKey
 var costumeKeys = ["1","2","3","4","5","6","7","8","9","0"]
 signal spriteVisToggles(keysPressed:Array)
-signal fatfuckingballs
 
 func _ready():
 	Global.main = self
@@ -585,6 +584,8 @@ func _on_button_pressed():
 func _on_settings_buttons_pressed():
 	settingsMenu.visible = !settingsMenu.visible
 
+
+#Note:Create list of blocked keys, so no conflict with default keybinds
 func _input(event):
 	var keyStrings = []
 	if event is InputEventKey and event.pressed:
@@ -616,10 +617,5 @@ func _input(event):
 		var i = costumeKeys.find(key)
 		if i >= 0:
 			changeCostume(i+1)
-	
-	
-	if keyStrings.size() <= 0:
-		emit_signal("fatfuckingballs")
-		return
 	
 	emit_signal("spriteVisToggles", keyStrings)
